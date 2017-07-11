@@ -1,0 +1,1 @@
+data class KnapsackProblem(val items: Array<Item>, val capacity: Int)
