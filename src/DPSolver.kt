@@ -1,5 +1,5 @@
 
-class DynamicProgrammingSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack) {
+class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack) {
 
     val cache = mutableMapOf<Pair<Int, Int>, KnapsackSolution>()
 
