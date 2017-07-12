@@ -1,14 +1,15 @@
-
-class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack) {
+/**
+ * Dynamic Programming solver.
+ * Complexity is O(nC) with n being the number of items and C being the total capacity of the knapsack.
+ */
+class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack, "Dynamic Programming") {
 
     val cache = mutableMapOf<Pair<Int, Int>, KnapsackSolution>()
 
-
-    override fun solve(): KnapsackSolution {
+    override fun getSolution(): KnapsackSolution {
         val solution = loop(items.size - 1, capacity)
         return solution
     }
-
 
     private fun loop (j: Int, k: Int): KnapsackSolution {
 

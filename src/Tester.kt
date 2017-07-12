@@ -1,29 +1,29 @@
+
 fun main(args: Array<String>) {
 
-    val items = arrayOf<Item>(
-            Item(10, 5),
-            Item(5, 3),
-            Item(15, 9),
-            Item(7, 7),
-            Item(8, 4),
-            Item(10, 3),
-            Item(11, 4),
-            Item(13, 5)
-    )
+    val problem = KnapsackProblem.fromFile("easy50.txt")
 
-    val capacity = 20
+    val dp = DPSolver(problem)
+    val greedy = GreedySolver(problem)
+    val dpSolution = dp.solve()
+    printSolution(dpSolution)
+    val greedySolution = greedy.solve()
+    printSolution(greedySolution)
+}
 
-    val problem = KnapsackProblem(items, capacity)
+fun printSolution (solution: KnapsackSolution) {
 
-    val solver = DynamicProgrammingSolver(problem)
-
-    val solution = solver.solve()
+    println(solution.name)
+    println("=================")
 
     solution.items.forEach {
         println(it)
     }
 
-    println(solution.weight)
-    println(solution.value)
-
+    println("ms: ${solution.time}")
+    println("weight: ${solution.weight}")
+    println("value: ${solution.value}")
+    println("=================")
+    println()
 }
+

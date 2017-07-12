@@ -1,5 +1,8 @@
 
+
 class KnapsackSolution {
+
+    var name: String = "Unnamed"
 
     // List of the indices of the items
     var items = mutableListOf<Item>()
@@ -9,6 +12,9 @@ class KnapsackSolution {
 
     // Total weight for the knapsack
     var weight: Int = 0
+
+    // The time in ms to retrieve the solution
+    var time: Long = 0
 
 
     fun add(item: Item): KnapsackSolution {
@@ -28,5 +34,7 @@ class KnapsackSolution {
         fun betterOf(a: KnapsackSolution, b: KnapsackSolution): KnapsackSolution {
             return if (a.better(b)) a else b
         }
+
+
     }
 }
