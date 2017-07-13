@@ -3,7 +3,7 @@
  */
 class GreedySolver(problem: KnapsackProblem): KnapsackSolver(problem, "Greedy") {
     override fun getSolution(): KnapsackSolution {
-        val sorted = items.sortedBy { it.ratio }
+        val sorted = items.sortedByDescending { it.ratio }
         val solution = KnapsackSolution()
 
 

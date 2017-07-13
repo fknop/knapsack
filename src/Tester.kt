@@ -3,12 +3,19 @@ fun main(args: Array<String>) {
 
     val problem = KnapsackProblem.fromFile("easy50.txt")
 
+    val bab = BranchAndBoundSolver(problem)
+    val solution = bab.solve()
+    printSolution(solution)
+
     val dp = DPSolver(problem)
-    val greedy = GreedySolver(problem)
     val dpSolution = dp.solve()
     printSolution(dpSolution)
+
+    /*
+    val greedy = GreedySolver(problem)
     val greedySolution = greedy.solve()
     printSolution(greedySolution)
+    */
 }
 
 fun printSolution (solution: KnapsackSolution) {
