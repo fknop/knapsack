@@ -30,7 +30,9 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
     inner class ItemNode(): Comparable<ItemNode> {
         override fun compareTo(other: ItemNode): Int {
-            return other.bound.toInt() - bound.toInt()
+            return if (other.bound - bound < 0) -1
+            else if (other.bound == bound) 0
+            else 1
         }
 
         var level: Int = -1
@@ -66,6 +68,8 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
         while (pq.isNotEmpty()) {
             val item = pq.poll()
+            println("item bound: ${item.bound}")
+            println("best value: ${best.value}")
 
             if (item.bound > best.value && item.level < sortedItems.size - 1) {
 
@@ -78,6 +82,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
                 if (with.weight <= capacity) {
                     with.taken.add(sortedItems[with.level])
                     with.computeBound()
+
                     println(with.bound)
                     if (with.value > best.value) {
                         best = with
@@ -91,6 +96,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
                 // Don't take item
                 val without = ItemNode(item)
                 without.computeBound()
+                println(without.bound)
 
                 if (without.bound > best.value) {
                     pq.offer(without)
