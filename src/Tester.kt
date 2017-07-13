@@ -1,24 +1,24 @@
 
 fun main(args: Array<String>) {
 
-    val problem = KnapsackProblem.fromFile("easy50.txt")
-
+    val problem = KnapsackProblem.fromFile("hard200.txt")
+/*
     val bab = BranchAndBoundSolver(problem)
     val solution = bab.solve()
-    printSolution(solution)
+    printSolution(problem, solution)
+*/
+//    val dp = DPSolver(problem)
+  //  val dpSolution = dp.solve()
+    //printSolution(dpSolution)
 
-    val dp = DPSolver(problem)
-    val dpSolution = dp.solve()
-    printSolution(dpSolution)
 
-    /*
     val greedy = GreedySolver(problem)
     val greedySolution = greedy.solve()
-    printSolution(greedySolution)
-    */
+    printSolution(problem, greedySolution)
+
 }
 
-fun printSolution (solution: KnapsackSolution) {
+fun printSolution (problem: KnapsackProblem, solution: KnapsackSolution) {
 
     println(solution.name)
     println("=================")
@@ -30,6 +30,7 @@ fun printSolution (solution: KnapsackSolution) {
     println("ms: ${solution.time}")
     println("weight: ${solution.weight}")
     println("value: ${solution.value}")
+    println("check: ${solution.checkSolution(problem.capacity)}")
     println("=================")
     println()
 }

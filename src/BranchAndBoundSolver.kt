@@ -33,7 +33,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
             return other.bound.toInt() - bound.toInt()
         }
 
-        var level: Int = 0
+        var level: Int = -1
         var bound: Double = .0
         var value: Int = 0
         var weight: Int = 0
@@ -49,7 +49,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
         fun computeBound() {
             val solver = this@BranchAndBoundSolver
-            this.bound = solver.boundStrategy.computeBound(solver.sortedItems, level, solver.capacity, weight, value.toDouble())
+            this.bound = solver.boundStrategy.computeBound(solver.sortedItems, level + 1, solver.capacity, weight, value.toDouble())
         }
     }
 
@@ -59,6 +59,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
         val root = ItemNode()
         val pq = PriorityQueue<ItemNode>()
 
+        // The root is not an element of the knapsack
         root.computeBound()
 
         pq.offer(root)
@@ -70,13 +71,14 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
                 // Take item
                 val with = ItemNode(item)
+
                 with.weight += sortedItems[with.level].weight
                 with.value += sortedItems[with.level].value
 
                 if (with.weight <= capacity) {
                     with.taken.add(sortedItems[with.level])
                     with.computeBound()
-
+                    println(with.bound)
                     if (with.value > best.value) {
                         best = with
                     }

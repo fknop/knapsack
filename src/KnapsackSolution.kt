@@ -30,11 +30,15 @@ class KnapsackSolution {
         return this.value > solution.value
     }
 
+    fun checkSolution(capacity: Int): Boolean {
+        val w = items.sumBy { it.weight }
+        val v = items.sumBy { it.value }
+        return w == weight && v == value && weight <= capacity
+    }
+
     companion object {
         fun betterOf(a: KnapsackSolution, b: KnapsackSolution): KnapsackSolution {
             return if (a.better(b)) a else b
         }
-
-
     }
 }
