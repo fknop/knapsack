@@ -68,9 +68,7 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
         while (pq.isNotEmpty()) {
             val item = pq.poll()
-            println("item bound: ${item.bound}")
-            println("best value: ${best.value}")
-
+    
             if (item.bound > best.value && item.level < sortedItems.size - 1) {
 
                 // Take item
@@ -96,7 +94,6 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
                 // Don't take item
                 val without = ItemNode(item)
                 without.computeBound()
-                println(without.bound)
 
                 if (without.bound > best.value) {
                     pq.offer(without)
