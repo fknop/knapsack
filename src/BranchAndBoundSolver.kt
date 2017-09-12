@@ -81,7 +81,6 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
                     with.taken.add(sortedItems[with.level])
                     with.computeBound()
 
-                    println(with.bound)
                     if (with.value > best.value) {
                         best = with
                     }
