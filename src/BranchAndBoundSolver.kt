@@ -68,7 +68,6 @@ class BranchAndBoundSolver(problem: KnapsackProblem, val boundStrategy: ComputeB
 
         while (pq.isNotEmpty()) {
             val item = pq.poll()
-
             if (item.bound > best.value && item.level < sortedItems.size - 1) {
 
                 // Take item
