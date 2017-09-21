@@ -12,7 +12,7 @@ fun convert (pathIn: String, pathOut: String) {
     val items = mutableListOf<Item>()
     for (i in 0..count - 1) {
         val ignore = scanner.nextInt()
-        val item = Item(scanner.nextInt(), scanner.nextInt())
+        val item = Item(scanner.nextInt(), scanner.nextInt(), i)
         items.add(item)
     }
 

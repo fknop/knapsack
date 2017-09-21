@@ -9,10 +9,10 @@ data class KnapsackProblem(val items: Array<Item>, val capacity: Int) {
             val n = scanner.nextInt()
             val capacity = scanner.nextInt()
 
-            val items = 1.rangeTo(n).map {
+            val items = 1.rangeTo(n).mapIndexed { index, i ->
                 val value = scanner.nextInt()
                 val weight = scanner.nextInt()
-                Item(value, weight)
+                Item(value, weight, index - 1)
             }.toTypedArray()
 
             return KnapsackProblem(items, capacity)
