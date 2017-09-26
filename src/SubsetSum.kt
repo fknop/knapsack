@@ -1,13 +1,13 @@
 /**
- * Greedy solver complexity is O(n) but it's not giving the optimal value.
+ * Special case where all of the items are the same value/weight and a sum of items can reach the final capacity
  */
-class SubsetSum(problem: KnapsackProblem): KnapsackSolver(problem, "Greedy") {
+class SubsetSum(problem: KnapsackProblem): KnapsackSolver(problem, "SubsetSum") {
 
     override fun getSolution(): KnapsackSolution {
-        return isSubsetSum(items.size, capacity) ?: KnapsackSolution()
+        return loop(items.size, capacity) ?: KnapsackSolution()
     }
 
-    fun isSubsetSum(n: Int, sum: Int): KnapsackSolution? {
+    fun loop(n: Int, sum: Int): KnapsackSolution? {
         if (sum == 0) {
             return KnapsackSolution()
         }
@@ -17,16 +17,16 @@ class SubsetSum(problem: KnapsackProblem): KnapsackSolver(problem, "Greedy") {
         }
 
         if (sum - items[n-1].weight  < 0) {
-            return isSubsetSum(n - 1, sum)
+            return loop(n - 1, sum)
         }
         else {
-            val skip = isSubsetSum(n - 1, sum)
+            val skip = loop(n - 1, sum)
 
             if (skip != null) {
                 return skip
             }
 
-            val add = isSubsetSum(n - 1, sum - items[n - 1].weight)?.add(items[n-1])
+            val add = loop(n - 1, sum - items[n - 1].weight)?.add(items[n-1])
 
             if (add != null) {
                 return add

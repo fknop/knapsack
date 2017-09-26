@@ -3,7 +3,7 @@ fun main(args: Array<String>) {
 
     val problem = KnapsackProblem.fromFile(args[0])
 
-    val g = SubsetSum(problem)
+    val g = BranchAndBoundSolver(problem)
     val solution = g.solve()
 
     printForInginious(problem, solution)
