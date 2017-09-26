@@ -1,18 +1,17 @@
 
 fun main(args: Array<String>) {
 
-    val problem = KnapsackProblem.fromFile("instanceB.txt")
+    val problem = KnapsackProblem.fromFile(args[0])
 
-    val greedy = GreedySolver(problem)
-    val solution = greedy.solve()
+    val g = SubsetSum(problem)
+    val solution = g.solve()
 
     printForInginious(problem, solution)
-    println(solution.weight)
 }
 
 fun printForInginious(problem: KnapsackProblem, solution: KnapsackSolution) {
     println(solution.value)
-    problem.items.forEachIndexed { index, item ->
+    problem.items.forEachIndexed { index, _ ->
         if (solution.indexedItems.containsKey(index)) {
             print(1)
         }

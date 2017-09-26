@@ -4,11 +4,10 @@
  */
 class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack, "Dynamic Programming") {
 
-    val cache = mutableMapOf<Pair<Int, Int>, KnapsackSolution>()
+    private val cache = mutableMapOf<Pair<Int, Int>, KnapsackSolution>()
 
     override fun getSolution(): KnapsackSolution {
-        val solution = loop(items.size - 1, capacity)
-        return solution
+        return loop(items.size - 1, capacity)
     }
 
     private fun loop (j: Int, k: Int): KnapsackSolution {
@@ -18,6 +17,7 @@ class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack, "Dynamic Pro
         }
 
         val wj = items[j].weight
+        // Capacity constraint violated
         if (wj > k) {
             // Don't take this item, skip to next
             return cached(j - 1, k)
@@ -29,6 +29,9 @@ class DPSolver(knapsack: KnapsackProblem): KnapsackSolver(knapsack, "Dynamic Pro
         }
     }
 
+    /**
+     * Return the cached value or compute it if not in the cache.
+     */
     private fun cached (j: Int, k: Int): KnapsackSolution {
         val pair = Pair(j, k)
         if (pair !in cache) {
